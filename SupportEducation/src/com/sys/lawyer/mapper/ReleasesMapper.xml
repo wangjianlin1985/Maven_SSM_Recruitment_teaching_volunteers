@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+    <!DOCTYPE mapper   
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 不使用namespace的话sql搜索定位会比较方便-->
+<mapper namespace="com.sys.lawyer.mapper.ReleasesMapper">
+
+     <!-- 实体类与数据库映射字段部分  start -->
+	<resultMap id="ResultMapReleases" type="com.sys.lawyer.po.Releases">
+        <result property="id" column="id"  jdbcType="INTEGER"/>
+        <result property="typeId" column="typeId"  jdbcType="INTEGER"/>
+        <result property="rs" column="rs"  jdbcType="INTEGER"/>
+        <result property="zjTime" column="zjTime"  jdbcType="DATE"/>
+        <result property="fwTime" column="fwTime"  jdbcType="DATE"/>
+        <result property="lxr" column="lxr"  jdbcType="VARCHAR"/>
+        <result property="lxfs" column="lxfs"  jdbcType="VARCHAR"/>
+        <result property="bz" column="bz"  jdbcType="VARCHAR"/>
+        <result property="isFb" column="isFb"  jdbcType="INTEGER"/>
+        <result property="fbTime" column="fbTime"  jdbcType="DATE"/>
+        <result property="usersId" column="usersId"  jdbcType="INTEGER"/>
+        <result property="syrs" column="syrs"  jdbcType="INTEGER"/>
+	</resultMap>
+	 <!-- 实体类与数据库映射字段部分  end -->
+	 
+	 <!-- 声明数据库字段 -->
+	<sql id="Releases_field">
+           id,
+           typeId,
+           rs,
+           zjTime,
+           fwTime,
+           lxr,
+           lxfs,
+           bz,
+           isFb,
+           fbTime,
+           usersId,
+           syrs
+	</sql>
+	<sql id="Releases_inserts">
+		typeId,
+		rs,
+		zjTime,
+		fwTime,
+		lxr,
+		lxfs,
+		bz,
+		isFb,
+		fbTime,
+		usersId,
+        syrs
+	</sql>
+	<!-- 实体类属性  -->
+	<sql id="Releases_insert">
+        	#{typeId} ,
+        	#{rs} ,
+        	#{zjTime} ,
+        	#{fwTime} ,
+        	#{lxr} ,
+        	#{lxfs} ,
+        	#{bz} ,
+        	#{isFb} ,
+        	#{fbTime} ,
+        	#{usersId},
+        	#{syrs}
+	</sql>
+	
+	<!-- 执行修改时 数据库字段和表字段比较 -->
+	<sql id="Releases_update">
+		    <if test="typeId != null" >
+	            typeId = #{typeId} ,
+	        </if>
+		    <if test="rs != null" >
+	            rs = #{rs} ,
+	        </if>
+		    <if test="zjTime != null" >
+	            zjTime = #{zjTime} ,
+	        </if>
+		    <if test="fwTime != null" >
+	            fwTime = #{fwTime} ,
+	        </if>
+		    <if test="lxr != null" >
+	            lxr = #{lxr} ,
+	        </if>
+		    <if test="lxfs != null" >
+	            lxfs = #{lxfs} ,
+	        </if>
+		    <if test="bz != null" >
+	            bz = #{bz} ,
+	        </if>
+		    <if test="isFb != null" >
+	            isFb = #{isFb} ,
+	        </if>
+		    <if test="fbTime != null" >
+	            fbTime = #{fbTime} ,
+	        </if>
+		    <if test="usersId != null" >
+	            usersId = #{usersId} ,
+	        </if>
+        <if test="syrs != null" >
+            syrs = #{syrs}
+        </if>
+	</sql>
+	
+	<!-- 查询时条件 -->
+	<sql id="Releases_where">
+	        <if test="id != null " >
+	            and id =#{id}
+	        </if>
+	        <if test="typeId != null " >
+	            and typeId =#{typeId}
+	        </if>
+	        <if test="rs != null " >
+	            and rs =#{rs}
+	        </if>
+	        <if test="zjTime != null " >
+	            and zjTime =#{zjTime}
+	        </if>
+	        <if test="fwTime != null " >
+	            and fwTime =#{fwTime}
+	        </if>
+	        <if test="lxr != null " >
+	            and lxr =#{lxr}
+	        </if>
+	        <if test="lxfs != null " >
+	            and lxfs =#{lxfs}
+	        </if>
+	        <if test="bz != null " >
+	            and bz =#{bz}
+	        </if>
+	        <if test="isFb != null " >
+	            and isFb =#{isFb}
+	        </if>
+	        <if test="fbTime != null " >
+	            and fbTime =#{fbTime}
+	        </if>
+	        <if test="usersId != null " >
+	            and usersId =#{usersId}
+	        </if>
+	        <if test="syrs != null " >
+	            and syrs =#{syrs}
+	        </if>
+	</sql>
+	
+   <!-- **************************************分割线************************************************************ -->	
+	
+	<!-- 以下是sql执行语句 
+	     注意：1)需要传参数的请注意你使用的方法是 xxByMap还是ByEntuty 存放的参数类型不一致。
+	      2)非自定义的方法已经是basedao注明的。方法名一定要和id相同
+	      3)自定义类的方法注意是否和共有方法重名id
+	      4)执行sql出现顺序和baseDao方法一致，便于查询请勿随意添加，自定义的sql一律放在自定义sql区域
+	 -->
+	
+	
+   <!-- ========================================新增==================================================================== -->
+	<!-- 
+	 【注意添加序列】
+	 1.方法描述：新增数据
+	 2.参数：实体类
+	 3.返回：主键
+	-->
+	<insert id="insert" parameterType="com.sys.lawyer.po.Releases" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO releases (
+        <include refid="Releases_inserts" />
+        ) VALUES (
+        <include refid="Releases_insert" />       
+        )
+	</insert>
+	
+	
+	 <!-- ========================================删除==================================================================== -->
+	<!-- 
+	 1.方法描述：根据主键id删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+	 delete from releases where id=#{id}
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据实体类删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByEntity" parameterType="com.sys.lawyer.po.Releases">
+	 delete from releases
+	  WHERE 1=1
+      <include refid="Releases_where" />   
+	</delete>
+	
+	
+	<!-- 
+	 1.方法描述：根据map删除
+	 2.参数：主键id
+	-->
+	<delete id="deleteByMap" parameterType="java.util.HashMap">
+	 delete from releases
+	  WHERE 1=1
+      <include refid="Releases_where" />   
+	</delete>
+	
+	
+	 <!-- ========================================修改==================================================================== -->
+	<!-- 
+	 1.方法描述：修改数据
+	 2.参数：实体类
+	-->
+	<update id="update" parameterType="com.sys.lawyer.po.Releases">
+        UPDATE releases
+        <set>
+	        <include refid="Releases_update" />
+	    </set>
+        WHERE 1=1
+        	<include refid="Releases_where" />        
+	</update>
+	
+	<!-- 
+	 1.方法描述：修改数据通过id
+	 2.参数：实体类
+	 -->
+	<update id="updateById" parameterType="com.sys.lawyer.po.Releases">
+        UPDATE releases
+        <set>
+	        <include refid="Releases_update" />
+	    </set>
+        WHERE 1=1
+        	and id=#{id}      
+	</update>
+	
+	
+	
+	 <!-- ========================================查询列表【不分页】==================================================================== -->
+	
+	<!-- 
+	 1.方法描述：用于listByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="listByMap" resultMap="ResultMapReleases" parameterType="map">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于select查询所有
+	 2.参数：无参数
+	-->
+	<select id="listAll" resultMap="ResultMapReleases">
+		select <include refid="Releases_field" />
+ 		from releases 
+	</select>
+	
+	
+	<!-- 
+	 1.方法描述：查询所有实体,根据实体属性值为判断条件查询所有实体，
+	 2.参数：Entity
+	-->
+	<select id="listAllByEntity" resultMap="ResultMapReleases" parameterType="com.sys.lawyer.po.Releases">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+	
+	
+	 <!-- ========================================查询单个对象==================================================================== -->
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="load" resultMap="ResultMapReleases" parameterType="java.lang.Integer">
+		select 	<include refid="Releases_field" />
+ 		from releases 
+ 		where id=#{id}
+	</select>
+	
+	
+	
+	<!-- 
+	 1.方法描述：select查询单个
+	 2.参数：id
+	-->
+	<select id="getById" resultMap="ResultMapReleases" parameterType="java.lang.Integer">
+		select 	<include refid="Releases_field" />
+ 		from releases 
+ 		where id=#{id}
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于getByMap根据map查询
+	 2.参数：map
+	-->
+	<select id="getByMap" resultMap="ResultMapReleases" parameterType="map">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+	<!-- 
+	 1.方法描述：用于Entity根据Entity查询
+	 2.参数：Entity
+	 -->
+	<select id="getByEntity" resultMap="ResultMapReleases" parameterType="com.sys.lawyer.po.Releases">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================查询列表【分页】==================================================================== -->
+     <!-- 
+	 1.方法描述：分页
+	 2.参数：map
+	 -->
+	<select id="findByMap" resultMap="ResultMapReleases" parameterType="map">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+     <!-- 
+	 1.方法描述：分页
+	 2.参数：Entity
+	 -->
+	<select id="findByEntity" resultMap="ResultMapReleases" parameterType="com.sys.lawyer.po.Releases">
+		select <include refid="Releases_field" />
+ 		from releases where 1=1
+ 		<include refid="Releases_where" /> 
+	</select>
+	
+	
+	 <!-- ========================================批量新增修改==================================================================== -->
+	<!-- 
+	 1.方法描述：批量插入
+	 2.参数：集合/数组
+	-->
+	<insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO releases (
+        <include refid="Releases_field" />
+        ) VALUES 
+        <foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			
+	            #{item.typeId} ,
+	            #{item.rs} ,
+	            #{item.zjTime} ,
+	            #{item.fwTime} ,
+	            #{item.lxr} ,
+	            #{item.lxfs} ,
+	            #{item.bz} ,
+	            #{item.isFb} ,
+	            #{item.fbTime} ,
+	            #{item.usersId} 
+			
+			)
+		</foreach>       
+        
+	</insert>
+    
+    <!-- 
+	 1.方法描述：批量修改
+	 2.参数：集合/数组
+	-->
+	<update id="updateBatch" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+        UPDATE 
+        releases 
+        <set>
+		    <if test="item.typeId != null" >
+	        typeId = #{item.typeId},
+	        </if>
+		    <if test="item.rs != null" >
+	        rs = #{item.rs},
+	        </if>
+		    <if test="item.zjTime != null" >
+	        zjTime = #{item.zjTime},
+	        </if>
+		    <if test="item.fwTime != null" >
+	        fwTime = #{item.fwTime},
+	        </if>
+		    <if test="item.lxr != null" >
+	        lxr = #{item.lxr},
+	        </if>
+		    <if test="item.lxfs != null" >
+	        lxfs = #{item.lxfs},
+	        </if>
+		    <if test="item.bz != null" >
+	        bz = #{item.bz},
+	        </if>
+		    <if test="item.isFb != null" >
+	        isFb = #{item.isFb},
+	        </if>
+		    <if test="item.fbTime != null" >
+	        fbTime = #{item.fbTime},
+	        </if>
+		    <if test="item.usersId != null" >
+	        usersId = #{item.usersId}
+	        </if>
+	    </set>
+        WHERE 
+        	1=1 
+        </foreach>    
+	</update>
+
+   <!-- ******************************自定义 sql************************************************************** -->
+   
+   <!-- 
+           通过sql查询单个对象 返回对象
+    -->
+   <select id="getBySqlReturnEntity" resultMap="ResultMapReleases">
+		${sql}
+   </select>
+   
+    <!-- 
+           通过sql查询单个对象 返回map
+    -->
+   <select id="getBySqlReturnMap" resultType="map">
+		${sql}
+   </select>
+   
+   <!-- 
+           通过sql查询集合 返回对象
+    -->
+   <select id="listBySqReturnEntity" resultMap="ResultMapReleases">
+		${sql}
+   </select>
+   
+    <!-- 
+           通过sql查询查询集合 返回map
+    -->
+   <select id="listBySqReturnMap" resultType="map">
+		${sql}
+   </select>
+   
+   <!-- 
+           通过sql查询分页集合 返回对象
+    -->
+   <select id="findBySqlRerturnEntity" resultMap="ResultMapReleases">
+		${sql}
+   </select>
+   
+   <!-- 通过sql修改 -->
+   <update id="updateBysql">
+       ${sql}  
+   </update>
+   
+   <delete id="deleteBySql">
+	${sql}  
+	</delete>
+	
+</mapper>
+
